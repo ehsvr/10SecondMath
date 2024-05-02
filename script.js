@@ -4,6 +4,7 @@ $(document).ready(function() {
   var timeLeft = 10;
   var score = 0;
   var highScore = 0;
+  var maxNumber = 0;
 
   var updateTimeLeft = function(amount) {
     timeLeft += amount;
@@ -59,8 +60,8 @@ $(document).ready(function() {
 
   var questionGenerator = function() {
     var question = {};
-    var num1 = randomNumberGenerator(10);
-    var num2 = randomNumberGenerator(10);
+    var num1 = randomNumberGenerator(maxNumber);
+    var num2 = randomNumberGenerator(maxNumber);
 
     question.answer = num1 + num2;
     question.equation = String(num1) + " + " + String(num2);
@@ -81,6 +82,10 @@ $(document).ready(function() {
       updateScore(+1);
     }
   };
+  $('#max-number').on('keyup', function() {
+    maxNumber = $('#max-number').val();
+    renderNewQuestion();
+  });
 
   $('#user-input').on('keyup', function() {
     startGame();
